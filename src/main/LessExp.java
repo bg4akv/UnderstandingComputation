@@ -34,7 +34,7 @@ public class LessExp extends Expression {
 	@Override
 	public String toString()
 	{
-		return String.format("(< %s %s)", leftExp.toString(), rightExp.toString());
+		return String.format("%s < %s", leftExp.toString(), rightExp.toString());
 	}
 
 }
