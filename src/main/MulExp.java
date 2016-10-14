@@ -1,6 +1,10 @@
 package main;
 
+import java.util.Map;
+
 public class MulExp extends Expression {
+	public Expression leftExp;
+	public Expression rightExp;
 
 	public MulExp(Expression leftExp, Expression rightExp)
 	{
@@ -15,14 +19,14 @@ public class MulExp extends Expression {
 	}
 
 	@Override
-	public Expression reduce()
+	public Expression reduce(Map<String, NumExp> enviroment)
 	{
 		if (leftExp.reduciable()) {
-			return new MulExp(leftExp.reduce(), rightExp);
+			return new MulExp(leftExp.reduce(enviroment), rightExp);
 		} else if (rightExp.reduciable()) {
-			return new MulExp(leftExp, rightExp.reduce());
+			return new MulExp(leftExp, rightExp.reduce(enviroment));
 		} else {
-			return new NumExp(leftExp.numValue + rightExp.numValue);
+			return new NumExp(((NumExp) leftExp).value * ((NumExp) rightExp).value);
 		}
 	}
 

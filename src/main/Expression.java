@@ -1,14 +1,15 @@
 package main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class Expression {
 	public enum ExpType {  
 		ADD, MUL, LESS, NUM, BOOL
 	};
 
-	public Expression leftExp;
-	public Expression rightExp;
-	public int numValue;
-	public boolean boolValue;
+	public final Map<String, NumExp> enviroment = new HashMap<String, NumExp>();
+
 
 	public void print()
 	{
@@ -16,7 +17,7 @@ public abstract class Expression {
 	}
 
 	abstract public boolean reduciable();
-	abstract public Expression reduce();
+	abstract public Expression reduce(Map<String, NumExp> enviroment);
 	abstract public String toString();
 
 }

@@ -1,6 +1,11 @@
 package main;
 
+import java.util.Map;
+
+
 public class LessExp extends Expression {
+	public Expression leftExp;
+	public Expression rightExp;
 
 	public LessExp(Expression leftExp, Expression rightExp)
 	{
@@ -15,14 +20,14 @@ public class LessExp extends Expression {
 	}
 
 	@Override
-	public Expression reduce()
+	public Expression reduce(Map<String, NumExp> enviroment)
 	{
 		if (leftExp.reduciable()) {
-			return new LessExp(leftExp.reduce(), rightExp);
+			return new LessExp(leftExp.reduce(enviroment), rightExp);
 		} else if (rightExp.reduciable()) {
-			return new LessExp(leftExp, rightExp.reduce());
+			return new LessExp(leftExp, rightExp.reduce(enviroment));
 		} else {
-			return new BoolExp(leftExp.numValue < rightExp.numValue);
+			return new BoolExp(((NumExp) leftExp).value < ((NumExp) rightExp).value);
 		}
 	}
 

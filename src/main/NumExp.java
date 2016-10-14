@@ -1,10 +1,13 @@
 package main;
 
+import java.util.Map;
+
 public class NumExp extends Expression {
+	public int value;
 
 	public NumExp(int value)
 	{
-		this.numValue = value;
+		this.value = value;
 	}
 
 	@Override
@@ -14,7 +17,7 @@ public class NumExp extends Expression {
 	}
 
 	@Override
-	public Expression reduce()
+	public Expression reduce(Map<String, NumExp> enviroment)
 	{
 		return this;
 	}
@@ -22,6 +25,6 @@ public class NumExp extends Expression {
 	@Override
 	public String toString()
 	{
-		return String.valueOf(numValue);
+		return String.valueOf(value);
 	}
 }

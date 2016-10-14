@@ -1,10 +1,15 @@
 package main;
 
+import java.util.Map;
+
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
+
 public class BoolExp extends Expression {
+	public boolean value;
 
 	public BoolExp(boolean value)
 	{
-		this.boolValue = value;
+		this.value = value;
 	}
 
 	@Override
@@ -14,7 +19,7 @@ public class BoolExp extends Expression {
 	}
 
 	@Override
-	public Expression reduce()
+	public Expression reduce(Map<String, NumExp> enviroment)
 	{
 		return this;
 	}
@@ -22,7 +27,7 @@ public class BoolExp extends Expression {
 	@Override
 	public String toString()
 	{
-		return String.valueOf(boolValue);
+		return String.valueOf(value);
 	}
 
 }
