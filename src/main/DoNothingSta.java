@@ -6,7 +6,12 @@ public class DoNothingSta extends Statement {
 
 	public DoNothingSta(Map<String, NumExp> enviroment)
 	{
-		currEnv = enviroment;
+		//newEnv = enviroment;
+	}
+
+	public DoNothingSta()
+	{
+		
 	}
 
 	@Override
@@ -24,6 +29,6 @@ public class DoNothingSta extends Statement {
 	@Override
 	public String toString()
 	{
-		return "do-nothing " ;
+		return "do-nothing" ;
 	}
 }

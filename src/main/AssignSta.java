@@ -1,17 +1,16 @@
 package main;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class AssignSta extends Statement {
-	public VarExp leftExp;
+	public VarExp varExp;
 	public Expression rightExp;
-	//public Map<String, NumExp> currEnv;
 
-	public AssignSta(VarExp leftExp, Expression rightExp, Map<String, NumExp> enviroment)
+	public AssignSta(VarExp leftExp, Expression rightExp)
 	{
-		this.leftExp = leftExp;
+		this.varExp = leftExp;
 		this.rightExp = rightExp;
-		this.currEnv = enviroment;
 	}
 
 	@Override
@@ -24,15 +23,21 @@ public class AssignSta extends Statement {
 	public Statement reduce(Map<String, NumExp> enviroment)
 	{
 		if (rightExp.reduciable()) {
-			return new AssignSta(leftExp, rightExp.reduce(enviroment), enviroment);
+			return new AssignSta(varExp, rightExp.reduce(enviroment));
 		} else {
-			return new DoNothingSta(enviroment);
+			//Map<String, NumExp> env = new HashMap<String, NumExp>(enviroment);
+			//env.put(varExp.name, (NumExp) rightExp);
+			//return new DoNothingSta(env);
+			
+			enviroment.put(varExp.name, (NumExp) rightExp);
+			return new DoNothingSta();
+			
 		}
 	}
 
 	@Override
 	public String toString()
 	{
-		return String.format("%s = %s", leftExp.name, rightExp.toString());
+		return String.format("%s = %s", varExp.name, rightExp.toString());
 	}
 }

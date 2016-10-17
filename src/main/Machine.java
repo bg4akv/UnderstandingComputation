@@ -13,17 +13,14 @@ public class Machine {
 		this.enviroment = enviroment;
 	}
 
-	public void step()
-	{
-		exp = exp.reduce(enviroment);
-	}
-
 	public void run()
 	{
 		exp.print();
+		System.out.println(exp.getEnv(enviroment));
 		while (exp.reduciable()) {
-			step();
+			exp = exp.reduce(enviroment);
 			exp.print();
+			System.out.println(exp.getEnv(enviroment));
 		}
 	}
 }
