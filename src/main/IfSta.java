@@ -23,7 +23,7 @@ public class IfSta extends Statement {
 	}
 
 	@Override
-	public Statement reduce(Map<String, NumExp> enviroment)
+	public Statement reduce(Map<String, Expression> enviroment)
 	{
 		if (condition.reduciable()) {
 			return new IfSta(condition.reduce(enviroment), consequence, altinative);
@@ -45,4 +45,13 @@ public class IfSta extends Statement {
 				altinative.toString());
 	}
 
+	@Override
+	public Statement evaluate(Map<String, Expression> enviroment)
+	{
+		if (((BoolExp) condition.evaluate(enviroment)).value) {
+			return consequence.evaluate(enviroment);
+		} else {
+			return altinative.evaluate(enviroment);
+		}
+	}
 }

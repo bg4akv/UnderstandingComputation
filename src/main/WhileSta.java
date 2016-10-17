@@ -21,7 +21,7 @@ public class WhileSta extends Statement {
 	}
 
 	@Override
-	public Statement reduce(Map<String, NumExp> enviroment)
+	public Statement reduce(Map<String, Expression> enviroment)
 	{
 		return new IfSta(condition, 
 				new SequenceSta(body, this),
@@ -37,4 +37,14 @@ public class WhileSta extends Statement {
 				body.toString());
 	}
 
+	@Override
+	public Statement evaluate(Map<String, Expression> enviroment)
+	{
+		if (((BoolExp) condition.evaluate(enviroment)).value) {
+			body.evaluate(enviroment);
+			return evaluate(enviroment);
+		} else {
+			return new DoNothingSta();
+		}
+	}
 }

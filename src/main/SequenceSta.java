@@ -20,11 +20,11 @@ public class SequenceSta extends Statement {
 	}
 
 	@Override
-	public Statement reduce(Map<String, NumExp> enviroment)
+	public Statement reduce(Map<String, Expression> enviroment)
 	{
 		if (firstSta instanceof DoNothingSta) {
-			//Map<String, NumExp> env = new HashMap<String, NumExp>(enviroment);
 			return secondSta;
+			
 		} else {
 			return new SequenceSta(firstSta.reduce(enviroment), secondSta);
 		}
@@ -36,6 +36,13 @@ public class SequenceSta extends Statement {
 		return String.format("%s;%s",
 				(firstSta != null)? firstSta.toString() : "",
 				(secondSta != null)? secondSta.toString() : "");
+	}
+
+	@Override
+	public Statement evaluate(Map<String, Expression> enviroment)
+	{
+		firstSta.evaluate(enviroment);
+		return secondSta.evaluate(enviroment);
 	}
 
 }

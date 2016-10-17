@@ -19,7 +19,7 @@ public class MulExp extends Expression {
 	}
 
 	@Override
-	public Expression reduce(Map<String, NumExp> enviroment)
+	public Expression reduce(Map<String, Expression> enviroment)
 	{
 		if (leftExp.reduciable()) {
 			return new MulExp(leftExp.reduce(enviroment), rightExp);
@@ -34,5 +34,10 @@ public class MulExp extends Expression {
 	public String toString()
 	{
 		return String.format("%s * %s", leftExp.toString(), rightExp.toString());
+	}
+
+	public Expression evaluate(Map<String, Expression> enviroment)
+	{
+		return new NumExp(((NumExp) leftExp.evaluate(enviroment)).value * ((NumExp) rightExp.evaluate(enviroment)).value);
 	}
 }

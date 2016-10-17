@@ -20,18 +20,13 @@ public class AssignSta extends Statement {
 	}
 
 	@Override
-	public Statement reduce(Map<String, NumExp> enviroment)
+	public Statement reduce(Map<String, Expression> enviroment)
 	{
 		if (rightExp.reduciable()) {
 			return new AssignSta(varExp, rightExp.reduce(enviroment));
-		} else {
-			//Map<String, NumExp> env = new HashMap<String, NumExp>(enviroment);
-			//env.put(varExp.name, (NumExp) rightExp);
-			//return new DoNothingSta(env);
-			
-			enviroment.put(varExp.name, (NumExp) rightExp);
+		} else {			
+			enviroment.put(varExp.name, rightExp);
 			return new DoNothingSta();
-			
 		}
 	}
 
@@ -39,5 +34,12 @@ public class AssignSta extends Statement {
 	public String toString()
 	{
 		return String.format("%s = %s", varExp.name, rightExp.toString());
+	}
+
+	@Override
+	public Statement evaluate(Map<String, Expression> enviroment)
+	{
+		enviroment.put(varExp.name, rightExp.evaluate(enviroment));
+		return new DoNothingSta();
 	}
 }

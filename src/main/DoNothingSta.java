@@ -4,16 +4,6 @@ import java.util.Map;
 
 public class DoNothingSta extends Statement {
 
-	public DoNothingSta(Map<String, NumExp> enviroment)
-	{
-		//newEnv = enviroment;
-	}
-
-	public DoNothingSta()
-	{
-		
-	}
-
 	@Override
 	public boolean reduciable()
 	{
@@ -21,14 +11,20 @@ public class DoNothingSta extends Statement {
 	}
 
 	@Override
-	public Statement reduce(Map<String, NumExp> enviroment)
+	public Statement reduce(Map<String, Expression> enviroment)
 	{
-		return null;
+		return this;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "do-nothing" ;
+	}
+
+	@Override
+	public Statement evaluate(Map<String, Expression> enviroment)
+	{
+		return this;
 	}
 }

@@ -17,7 +17,7 @@ public class NumExp extends Expression {
 	}
 
 	@Override
-	public Expression reduce(Map<String, NumExp> enviroment)
+	public Expression reduce(Map<String, Expression> enviroment)
 	{
 		return this;
 	}
@@ -26,5 +26,11 @@ public class NumExp extends Expression {
 	public String toString()
 	{
 		return String.valueOf(value);
+	}
+
+	@Override
+	public Expression evaluate(Map<String, Expression> enviroment)
+	{
+		return this;
 	}
 }

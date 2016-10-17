@@ -18,19 +18,19 @@ public class VarExp extends Expression {
 	}
 
 	@Override
-	public Expression reduce(Map<String, NumExp> enviroment)
+	public Expression reduce(Map<String, Expression> enviroment)
 	{
-		try {
-			return new NumExp(enviroment.get(name).value);
-		} catch (Exception e) {
-			//return new VarExp(name);
-			return new NumExp(0);
-		}
+		return enviroment.get(name);
 	}
 
 	@Override
 	public String toString()
 	{
 		return name;
+	}
+
+	public Expression evaluate(Map<String, Expression> enviroment)
+	{
+		return enviroment.get(name);
 	}
 }

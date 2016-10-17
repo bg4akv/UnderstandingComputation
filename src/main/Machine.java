@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Machine {
 	private Expression exp;
-	private Map<String, NumExp> enviroment;
+	private Map<String, Expression> enviroment;
 
-	public Machine(Expression exp, Map<String, NumExp> enviroment)
+	public Machine(Expression exp, Map<String, Expression> enviroment)
 	{
 		this.exp = exp;
 		this.enviroment = enviroment;

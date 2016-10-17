@@ -14,10 +14,12 @@ public abstract class Expression {
 	}
 
 	abstract public boolean reduciable();
-	abstract public Expression reduce(Map<String, NumExp> enviroment);
+	abstract public Expression reduce(Map<String, Expression> enviroment);
+	abstract public Expression evaluate(Map<String, Expression> enviroment);
 	abstract public String toString();
 
-	public String getEnv(Map<String, NumExp> enviroment)
+
+	public String getEnv(Map<String, Expression> enviroment)
 	{
 		if (enviroment == null) {
 			return "null";
@@ -33,7 +35,15 @@ public abstract class Expression {
 			if (envStr.length() > 0) {
 				envStr += ", ";
 			}
-			envStr += String.format("%s:%d", (String) entry.getKey(), ((NumExp) entry.getValue()).value);
+	
+			Expression exp = (Expression) entry.getValue();
+			String value = "";
+			if (exp instanceof NumExp) {
+				value = String.valueOf(((NumExp) entry.getValue()).value);
+			} else if (exp instanceof BoolExp) {
+				value = ((BoolExp) entry.getValue()).value? "true" : "false";
+			}
+			envStr += String.format("%s:%s", (String) entry.getKey(), value);
 		}
 
 		return "{" + envStr + "}";

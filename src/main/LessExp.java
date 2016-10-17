@@ -20,7 +20,7 @@ public class LessExp extends Expression {
 	}
 
 	@Override
-	public Expression reduce(Map<String, NumExp> enviroment)
+	public Expression reduce(Map<String, Expression> enviroment)
 	{
 		if (leftExp.reduciable()) {
 			return new LessExp(leftExp.reduce(enviroment), rightExp);
@@ -37,4 +37,9 @@ public class LessExp extends Expression {
 		return String.format("%s < %s", leftExp.toString(), rightExp.toString());
 	}
 
+	@Override
+	public Expression evaluate(Map<String, Expression> enviroment)
+	{
+		return new BoolExp(((NumExp) leftExp.evaluate(enviroment)).value < ((NumExp) rightExp.evaluate(enviroment)).value);
+	}
 }
