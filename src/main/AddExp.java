@@ -36,6 +36,7 @@ public class AddExp extends Expression {
 		return String.format("%s + %s", leftExp.toString(), rightExp.toString());
 	}
 
+	@Override
 	public Expression evaluate(Map<String, Expression> enviroment)
 	{
 		return new NumExp(((NumExp) leftExp.evaluate(enviroment)).value + ((NumExp) rightExp.evaluate(enviroment)).value);

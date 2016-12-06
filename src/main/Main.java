@@ -12,17 +12,18 @@ public class Main {
 		enviroment.put("b", new NumExp(20));
 		//enviroment.put("c", new NumExp(30));
 
-		
+
 		Expression exp = new LessExp(
 				new AddExp(
 					new AddExp(new NumExp(1), new NumExp(2)),
 					new AddExp(new NumExp(4), new NumExp(5))),
 				new MulExp(new VarExp("a"), new VarExp("b")));
-
+		exp.print();
 
 		Statement statement = new AssignSta(
 						new VarExp("x"),
 						new AddExp(new VarExp("a"), new VarExp("b")));
+		statement.print();
 
 		statement = new IfSta(new LessExp(
 					new VarExp("a"), new VarExp("b")),
@@ -33,7 +34,7 @@ public class Main {
 		//statement = statement.evaluate(enviroment);
 		//statement.print();
 		//System.out.println(statement.getEnv(enviroment));
-		
+
 		statement = new SequenceSta(
 				new AssignSta(new VarExp("e"), new VarExp("b")),
 				new AssignSta(new VarExp("f"), new VarExp("a")));
